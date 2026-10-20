@@ -1,0 +1,29 @@
+{
+  "liste": [
+    {
+      "ad": "Motosiklet",
+      "slug": "motosiklet",
+      "aciklama": "Motosiklet ve scooter ile uzun yol deneyimleri, ekipman ve sürüş notları."
+    },
+    {
+      "ad": "Gezi",
+      "slug": "gezi",
+      "aciklama": "Yurt içi ve yurt dışı gezi günlükleri, rota önerileri ve yol hikayeleri."
+    },
+    {
+      "ad": "Bahçe",
+      "slug": "bahce",
+      "aciklama": "Organik bahçecilik, kompost, toprak hazırlığı ve yetiştiricilik rehberleri."
+    },
+    {
+      "ad": "Ahşap",
+      "slug": "ahsap",
+      "aciklama": "Ahşap işleri, kendin yap projeleri ve atölye deneyimleri."
+    },
+    {
+      "ad": "Ürün Deneyimi",
+      "slug": "urun-deneyimi",
+      "aciklama": "Gerçek kullanıma dayalı ürün incelemeleri ve deneyim raporları."
+    }
+  ]
+}

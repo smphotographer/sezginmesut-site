@@ -1,0 +1,32 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ site.url }}/</loc>
+    <lastmod>{{ build.date | isoDate }}</lastmod>
+  </url>
+  <url>
+    <loc>{{ site.url }}/blog/</loc>
+    {%- if collections.akis.length %}
+    <lastmod>{{ collections.akis[0].date | isoDate }}</lastmod>
+    {%- endif %}
+  </url>
+  {%- for kat in kategoriler.liste %}
+  {%- set katItems = collections.akis | whereCategory(kat.slug) %}
+  {%- if katItems.length %}
+  <url>
+    <loc>{{ site.url }}/blog/kategori/{{ kat.slug }}/</loc>
+    <lastmod>{{ katItems[0].date | isoDate }}</lastmod>
+  </url>
+  {%- endif %}
+  {%- endfor %}
+  {%- for post in collections.yazilar %}
+  <url>
+    <loc>{{ post.url | absUrl(site.url) }}</loc>
+    <lastmod>{{ (post.data.updated or post.date) | isoDate }}</lastmod>
+  </url>
+  {%- endfor %}
+</urlset>

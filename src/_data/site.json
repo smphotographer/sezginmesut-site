@@ -1,0 +1,28 @@
+{
+  "name": "Sezgin Mesut",
+  "url": "https://sezginmesut.com",
+  "title": "Sezgin Mesut — Fotoğraf, Gezi, Bahçe ve Hobi İçerikleri",
+  "description": "Sezgin Mesut'un fotoğrafçılık, motosiklet gezileri, organik bahçe, ahşap işleri ve ürün deneyimleri üzerine YouTube videoları, blog yazıları ve portfolyosu.",
+  "blogDescription": "Motosiklet gezileri, organik bahçe, ahşap işleri, fotoğrafçılık ve ürün deneyimleri üzerine blog yazıları ve YouTube videoları.",
+  "defaultImage": "/gorseller/profil-fotografi.jpg",
+  "locale": "tr_TR",
+  "gaId": "G-FHEX83DTQ6",
+  "sameAs": [
+    "https://www.youtube.com/@SezginMesut",
+    "https://www.youtube.com/@BahceSirlari",
+    "https://www.youtube.com/@yoldankareler",
+    "https://www.youtube.com/@deneyimraporu",
+    "https://www.instagram.com/sezginmesut_/",
+    "https://www.instagram.com/smwoodcraft/",
+    "https://www.instagram.com/bahcesirlari/",
+    "https://www.behance.net/sezginmesut",
+    "https://www.shutterstock.com/tr/g/sezginmesut",
+    "https://mywed.com/tr/photographer/sezginmesut/"
+  ],
+  "kanallar": {
+    "Sezgin Mesut": "#cbff69",
+    "Bahçe Sırları": "#a8dbb2",
+    "Yoldan Kareler": "#ffbd90",
+    "Deneyim Raporu": "#dccbff"
+  }
+}

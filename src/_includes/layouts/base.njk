@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10120f">
+{% include "partials/seo.njk" %}
+  <link rel="icon" type="image/png" href="/gorseller/favicon-siyah.png">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} Blog" href="{{ site.url }}/blog/feed.xml">
+  {% block schema %}{% endblock %}
+  <style>
+{% block styles %}{% include "partials/blog.css" %}{% endblock %}
+  </style>
+  {%- if site.gaId %}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.gaId }}');
+  </script>
+  {%- endif %}
+</head>
+<body>
+  <a class="skip" href="#icerik">İçeriğe geç</a>
+  {% if isHome %}<canvas id="ambient" aria-hidden="true"></canvas>{% endif %}
+  <div class="ambient-glow" aria-hidden="true"></div>
+{% include "partials/sprite.njk" %}
+  <div class="page">
+{% include "partials/header.njk" %}
+{% block main %}{% endblock %}
+    <footer class="footer{% if isHome %} reveal{% endif %}"><span>© <span id="year">{{ build.year }}</span> {{ site.name }}</span><span>Merak hiç bitmesin.<svg aria-hidden="true"><use href="#spark"/></svg></span></footer>
+  </div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,126 @@
+{% extends "layouts/base.njk" %}
+{%- set kat = kategoriler.liste | findBy("slug", category) -%}
+{%- set ytId = youtube | youtubeId -%}
+{%- set current = collections.yazilar | findBy("url", page.url) -%}
+
+{% block schema %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "{{ page.url | absUrl(site.url) }}#article",
+        "mainEntityOfPage": "{{ page.url | absUrl(site.url) }}",
+        "headline": {{ title | dump | safe }},
+        "description": {{ description | dump | safe }},
+        "image": ["{{ (cover or site.defaultImage) | absUrl(site.url) }}"],
+        "datePublished": "{{ page.date | isoDate }}",
+        "dateModified": "{{ (updated or page.date) | isoDate }}",
+        "inLanguage": "tr-TR",
+        {%- if kat %}
+        "articleSection": {{ kat.ad | dump | safe }},
+        {%- endif %}
+        {%- if etiketler and etiketler.length %}
+        "keywords": {{ etiketler | join(", ") | dump | safe }},
+        {%- endif %}
+        "author": { "@type": "Person", "@id": "{{ site.url }}/#person", "name": "{{ site.name }}", "url": "{{ site.url }}/" },
+        "publisher": { "@id": "{{ site.url }}/#person" }
+        {%- if ytId %},
+        "video": {
+          "@type": "VideoObject",
+          "name": {{ title | dump | safe }},
+          "description": {{ description | dump | safe }},
+          "thumbnailUrl": "https://i.ytimg.com/vi/{{ ytId }}/hqdefault.jpg",
+          "uploadDate": "{{ page.date | isoDate }}",
+          "embedUrl": "https://www.youtube.com/embed/{{ ytId }}",
+          "contentUrl": "https://www.youtube.com/watch?v={{ ytId }}"
+        }
+        {%- endif %}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{{ site.url }}/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}/blog/" },
+          {%- if kat %}
+          { "@type": "ListItem", "position": 3, "name": {{ kat.ad | dump | safe }}, "item": "{{ site.url }}/blog/kategori/{{ kat.slug }}/" },
+          { "@type": "ListItem", "position": 4, "name": {{ title | dump | safe }} }
+          {%- else %}
+          { "@type": "ListItem", "position": 3, "name": {{ title | dump | safe }} }
+          {%- endif %}
+        ]
+      }
+    ]
+  }
+  </script>
+{% endblock %}
+
+{% block main %}
+    <main id="icerik" class="article-wrap">
+      <nav class="breadcrumb" aria-label="Konum">
+        <ol>
+          <li><a href="/">Ana Sayfa</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          {%- if kat %}<li><a href="/blog/kategori/{{ kat.slug }}/">{{ kat.ad }}</a></li>{% endif %}
+        </ol>
+      </nav>
+
+      <article>
+        <header class="article-header">
+          <div class="article-meta">
+            <span>Yazar: {{ site.name }}</span>
+            <time datetime="{{ page.date | isoDate }}">{{ page.date | trDate }}</time>
+            {%- if updated %}<span>Güncellendi: <time datetime="{{ updated | isoDate }}">{{ updated | trDate }}</time></span>{% endif %}
+            <span>{{ content | readingTime }} dk okuma</span>
+            {%- if kat %}<a href="/blog/kategori/{{ kat.slug }}/">{{ kat.ad }}</a>{% endif %}
+          </div>
+          <h1>{{ title }}</h1>
+          {%- if description %}<p class="article-lead">{{ description }}</p>{% endif %}
+        </header>
+
+        {%- if cover %}
+        <figure class="article-figure">
+          <img src="{{ cover }}" alt="{{ coverAlt or title }}" loading="eager" fetchpriority="high" eleventy:widths="480,800,1200" sizes="(max-width: 848px) calc(100vw - 48px), 800px">
+          {%- if coverCaption %}<figcaption>{{ coverCaption }}</figcaption>{% endif %}
+        </figure>
+        {%- endif %}
+
+        <div class="article-content">
+{{ content | safe }}
+        </div>
+
+        {%- if etiketler and etiketler.length %}
+        <div class="article-tags">
+          <span>Etiketler:</span>
+          {%- for etiket in etiketler %}
+          <span class="tag-item">#{{ etiket }}</span>
+          {%- endfor %}
+        </div>
+        {%- endif %}
+
+        {%- if ytId %}
+        <section class="video-section" aria-labelledby="video-baslik">
+          <h2 id="video-baslik">Video Deneyimi</h2>
+          <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/{{ ytId }}" title="{{ title }} — YouTube videosu" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </section>
+        {%- endif %}
+      </article>
+
+      {%- set benzerler = collections.akis | related(current or { url: page.url, data: { category: category } }) %}
+      {%- if benzerler.length %}
+      <section class="related" aria-labelledby="benzer-baslik">
+        <h2 id="benzer-baslik">Bunlar da ilginizi çekebilir</h2>
+        <div class="feed-list">
+          {%- for item in benzerler %}
+{% include "partials/card.njk" %}
+          {%- endfor %}
+        </div>
+      </section>
+      {%- endif %}
+
+      <p style="margin-top:40px"><a href="/blog/" class="back-link"><svg aria-hidden="true"><use href="#arrow-left"/></svg> Tüm yazılara dön</a></p>
+    </main>
+{% endblock %}

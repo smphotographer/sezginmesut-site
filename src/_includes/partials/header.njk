@@ -1,0 +1,10 @@
+    <header class="header{% if isHome %} enter{% endif %}">
+      <a class="wordmark custom-wordmark" href="/" aria-label="Sezgin Mesut, ana sayfa"><img class="site-logo" src="/gorseller/ust-logo-beyaz.jpg" width="84" height="84" alt="Sezgin Mesut logosu" eleventy:ignore></a>
+      <nav aria-label="Ana menü">
+        <a href="/blog/"{% if navActive == "blog" %} class="active" aria-current="page"{% endif %}>Blog</a>
+        <a href="/#youtube-kanallari">YouTube</a>
+        <a href="/#instagram-hesaplari">Instagram</a>
+        <a href="/#portfolyo">Portfolyo</a>
+      </nav>
+      <span class="header-note">MERAKIN PEŞİNDE <svg aria-hidden="true"><use href="#spark"/></svg></span>
+    </header>

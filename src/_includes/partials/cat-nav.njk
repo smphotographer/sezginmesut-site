@@ -1,0 +1,11 @@
+      <nav aria-label="Kategoriler">
+        <ul class="cat-nav">
+          <li><a href="/blog/"{% if not aktifKategori %} aria-current="page"{% endif %}>Tümü <small>{{ collections.akis | length }}</small></a></li>
+          {%- for kat in kategoriler.liste %}
+          {%- set adet = collections.akis | whereCategory(kat.slug) | length %}
+          {%- if adet > 0 %}
+          <li><a href="/blog/kategori/{{ kat.slug }}/"{% if aktifKategori == kat.slug %} aria-current="page"{% endif %}>{{ kat.ad }} <small>{{ adet }}</small></a></li>
+          {%- endif %}
+          {%- endfor %}
+        </ul>
+      </nav>

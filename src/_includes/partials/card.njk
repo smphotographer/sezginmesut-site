@@ -1,0 +1,32 @@
+{#- Tek bir akış kartı: blog yazısı ya da YouTube videosu. Değişken: item -#}
+{%- set isVideo = item.data.url -%}
+{%- set kat = kategoriler.liste | findBy("slug", item.data.category) -%}
+{%- if isVideo -%}
+  {%- set accent = site.kanallar[item.data.channel] or "#cbff69" -%}
+  {%- set href = item.data.url -%}
+  {%- set thumb = item.data.thumbnail -%}
+{%- else -%}
+  {%- set accent = "#cbff69" -%}
+  {%- set href = item.url -%}
+  {%- set thumb = item.data.cover -%}
+{%- endif -%}
+        <article class="feed-card" style="--card-accent:{{ accent }}">
+          <div class="feed-content">
+            <div class="feed-meta">
+              <span class="feed-badge">
+                {%- if isVideo %}<svg aria-hidden="true"><use href="#youtube"/></svg> {{ item.data.channel or "YouTube" }}{% else %}<svg aria-hidden="true"><use href="#blog"/></svg> {{ kat.ad if kat else "Blog" }}{% endif -%}
+              </span>
+              <time class="feed-date" datetime="{{ item.date | isoDate }}">{{ item.date | trDate }}</time>
+            </div>
+            <h2><a href="{{ href }}"{% if isVideo %} target="_blank" rel="noopener"{% endif %}>{{ item.data.title }}</a></h2>
+            <p>{{ item.data.description }}</p>
+            <span class="feed-action" aria-hidden="true">{{ "Videoyu İzle" if isVideo else "Yazıyı Oku" }} <svg><use href="#arrow"/></svg></span>
+          </div>
+          <div class="feed-media">
+            {%- if thumb %}
+            <img src="{{ thumb }}" alt="{{ item.data.coverAlt or item.data.title }}" width="400" height="267" eleventy:widths="400">
+            {%- elif isVideo and (item.data.url | youtubeId) %}
+            <img src="https://i.ytimg.com/vi/{{ item.data.url | youtubeId }}/hqdefault.jpg" alt="{{ item.data.title }}" width="480" height="360" loading="lazy" decoding="async" eleventy:ignore>
+            {%- endif %}
+          </div>
+        </article>

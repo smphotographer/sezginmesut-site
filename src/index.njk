@@ -1,0 +1,226 @@
+---
+permalink: /
+isHome: true
+title: "Sezgin Mesut — Fotoğraf, Gezi, Bahçe ve Hobi İçerikleri"
+---
+{% extends "layouts/base.njk" %}
+
+{% block styles %}{% include "partials/home.css" %}{% endblock %}
+
+{% block schema %}{% include "partials/home-schema.njk" %}{% endblock %}
+
+{% block main %}
+    <main id="icerik">
+      <div class="main-grid">
+        <section class="identity" aria-labelledby="name">
+          <div class="portrait-wrap enter" style="--delay:70ms">
+            <div class="portrait-orbit" aria-hidden="true"><i></i><i></i></div>
+            <div class="portrait-ring" aria-hidden="true"></div>
+            <img class="portrait" src="/gorseller/profil-fotografi.jpg" width="240" height="240" alt="Sezgin Mesut'un portresi" fetchpriority="high" loading="eager" eleventy:widths="400">
+            <span class="portrait-label">KEŞFET. ÜRET. PAYLAŞ.</span>
+            <svg class="portrait-spark" aria-hidden="true"><use href="#spark"/></svg>
+          </div>
+          <p class="eyebrow enter" style="--delay:140ms">DİJİTAL İÇERİK ÜRETİCİSİ</p>
+          <h1 id="name"><span class="name-line"><span>Sezgin</span></span><span class="name-line accent"><span>Mesut<span class="name-dot">.</span></span></span></h1>
+          <p class="bio enter" style="--delay:300ms">Hobi ve Ürün Deneyimlerimi Paylaşıyorum&nbsp;</p>
+          <p class="identity-foot enter" style="--delay:380ms"><span class="tiny-line" aria-hidden="true"></span> Merakının peşinde koşan; fotoğrafçılık, ahşap, bahçe ve gezilerini dijital mecralarda paylaşan içerik üreticisi.</p>
+        </section>
+
+        <section class="youtube-section" id="youtube-kanallari" aria-labelledby="youtube-title">
+          <div class="section-heading enter" style="--delay:160ms">
+            <h2 id="youtube-title"><svg class="platform-icon"><use href="#youtube"/></svg> YouTube kanalları</h2>
+            <span class="section-count">01 / 04</span>
+          </div>
+          <div class="youtube-grid">
+            <a class="channel-card main-channel enter" style="--delay:210ms;--card-accent:#cbff69" href="https://www.youtube.com/@SezginMesut" target="_blank" rel="noopener noreferrer" aria-label="Sezgin Mesut YouTube kanalını aç, yeni sekme">
+              <div class="card-top"><img src="/gorseller/youtube-sezgin-mesut.png" width="68" height="68" alt="" class="channel-avatar" eleventy:widths="136"><span class="card-number">01</span></div>
+              <div class="card-copy"><p class="card-topic">HOBİ</p>
+            <h3>Sezgin Mesut</h3><span class="handle">@SezginMesut</span></div>
+              <div class="card-bottom"><span class="card-caption">Benim dünyam</span><span class="open-label">Kanalı aç</span><span class="play-button"><svg><use href="#play"/></svg></span></div>
+              <div class="card-pattern" aria-hidden="true"></div>
+            </a>
+            <a class="channel-card garden-channel enter" style="--delay:270ms;--card-accent:#a8dbb2" href="https://www.youtube.com/@BahceSirlari" target="_blank" rel="noopener noreferrer" aria-label="Bahçe Sırları YouTube kanalını aç, yeni sekme">
+              <div class="card-top"><img src="/gorseller/youtube-bahce-sirlari.png" width="68" height="68" alt="" class="channel-avatar" eleventy:widths="136"><span class="card-number">02</span></div>
+              <div class="card-copy"><p class="card-topic">BAHÇE & TARIM</p><h3>Bahçe Sırları</h3><span class="handle">@BahceSirlari</span></div>
+              <div class="card-bottom"><span class="card-caption">Toprağa dokun</span><span class="open-label">Kanalı aç</span><span class="play-button"><svg><use href="#play"/></svg></span></div>
+              <div class="card-pattern" aria-hidden="true"></div>
+            </a>
+            <a class="channel-card road-channel enter" style="--delay:330ms;--card-accent:#ffbd90" href="https://www.youtube.com/@yoldankareler" target="_blank" rel="noopener noreferrer" aria-label="Yoldan Kareler YouTube kanalını aç, yeni sekme">
+              <div class="card-top"><img src="/gorseller/youtube-yoldan-kareler.png" width="68" height="68" alt="" class="channel-avatar" eleventy:widths="136"><span class="card-number">03</span></div>
+              <div class="card-copy"><p class="card-topic">GEZİ VLOG</p>
+            <h3>Yoldan Kareler</h3><span class="handle">@yoldankareler</span></div>
+              <div class="card-bottom"><span class="card-caption">Yola çık</span><span class="open-label">Kanalı aç</span><span class="play-button"><svg><use href="#play"/></svg></span></div>
+              <div class="card-pattern" aria-hidden="true"></div>
+            </a>
+            <a class="channel-card experience-channel enter" style="--delay:390ms;--card-accent:#dccbff" href="https://www.youtube.com/@deneyimraporu" target="_blank" rel="noopener noreferrer" aria-label="Deneyim Raporu YouTube kanalını aç, yeni sekme">
+              <div class="card-top"><img src="/gorseller/youtube-deneyim-raporu.png" width="68" height="68" alt="" class="channel-avatar" eleventy:widths="136"><span class="card-number">04</span></div>
+              <div class="card-copy"><p class="card-topic">ÜRÜN DENEYİMLERİ</p><h3>Deneyim Raporu</h3><span class="handle">@deneyimraporu</span></div>
+              <div class="card-bottom"><span class="card-caption">Birlikte deneyelim</span><span class="open-label">Kanalı aç</span><span class="play-button"><svg><use href="#play"/></svg></span></div>
+              <div class="card-pattern" aria-hidden="true"></div>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <div class="interest-strip reveal" aria-label="İlgi alanları: tasarım, fotoğraf, ahşap, bahçe, motosiklet, karavan, kamp, doğa ve gezi">
+        <div class="marquee" aria-hidden="true">
+          <span>FOTOĞRAF <b>✳</b> HOBİ <b>✳</b> BAHÇE <b>✳</b> MOTOSİKLET <b>✳</b> KARAVAN <b>✳</b> VLOG <b>✳</b> DOĞA <b>✳</b> GEZİ <b>✳</b> TASARIM <b>✳</b></span>
+          <span>FOTOĞRAF <b>✳</b> HOBİ <b>✳</b> BAHÇE <b>✳</b> MOTOSİKLET <b>✳</b> KARAVAN <b>✳</b> VLOG <b>✳</b> DOĞA <b>✳</b> GEZİ <b>✳</b> TASARIM <b>✳</b></span>
+        </div>
+      </div>
+
+      <section class="instagram-section" id="instagram-hesaplari" aria-labelledby="instagram-title">
+        <div class="section-heading reveal"><h2 id="instagram-title"><svg class="platform-icon"><use href="#instagram"/></svg> Instagram hesapları</h2><span class="section-count">02 / 03</span></div>
+        <div class="instagram-grid">
+          <a class="instagram-card reveal" style="--card-accent:#ff9cc4" href="https://www.instagram.com/sezginmesut_/" target="_blank" rel="noopener noreferrer" aria-label="Sezgin Mesut Instagram hesabını aç, yeni sekme">
+            <img src="/gorseller/instagram-sezgin-mesut.png" width="58" height="58" alt="" class="instagram-avatar" eleventy:widths="116">
+            <div><h3>Sezgin Mesut</h3><span class="handle">@sezginmesut_</span><span class="instagram-open">Profili aç</span></div>
+            <svg class="instagram-mark"><use href="#instagram"/></svg>
+          </a>
+          <a class="instagram-card reveal" style="--card-accent:#e9c5a0;--reveal-delay:80ms" href="https://www.instagram.com/smwoodcraft/" target="_blank" rel="noopener noreferrer" aria-label="SM Woodcraft Instagram hesabını aç, yeni sekme">
+            <img src="/gorseller/instagram-sm-woodcraft.png" width="58" height="58" alt="" class="instagram-avatar" eleventy:widths="116">
+            <div><h3>SM Woodcraft</h3><span class="handle">@smwoodcraft</span><span class="instagram-open">Profili aç</span></div>
+            <svg class="instagram-mark"><use href="#instagram"/></svg>
+          </a>
+          <a class="instagram-card reveal" style="--card-accent:#a8dbb2;--reveal-delay:160ms" href="https://www.instagram.com/bahcesirlari/" target="_blank" rel="noopener noreferrer" aria-label="Bahçe Sırları Instagram hesabını aç, yeni sekme">
+            <img src="/gorseller/instagram-bahce-sirlari.png" width="58" height="58" alt="" class="instagram-avatar" eleventy:widths="116">
+            <div><h3>Bahçe Sırları</h3><span class="handle">@bahcesirlari</span><span class="instagram-open">Profili aç</span></div>
+            <svg class="instagram-mark"><use href="#instagram"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <section id="portfolyo" aria-labelledby="portfolio-title">
+        <a class="portfolio-card reveal" href="https://www.behance.net/sezginmesut" target="_blank" rel="noopener noreferrer" aria-label="Sezgin Mesut Behance portfolyosunu aç, yeni sekme" style="--card-accent:#cbff69">
+          <div class="portfolio-intro"><span class="behance-logo" aria-hidden="true">Bē</span><div><p class="card-topic">TASARIM PORTFOLYOSU</p><h2 id="portfolio-title">İşlerime göz at.</h2></div></div>
+          <div class="portfolio-end"><span>Behance portfolyo</span><img src="/gorseller/behance-portfolyo.png" width="52" height="52" alt="" eleventy:widths="104"></div>
+          <svg class="portfolio-spark" aria-hidden="true"><use href="#spark"/></svg>
+        </a>
+      </section>
+      <section id="shutterstock-portfolyo" aria-labelledby="shutterstock-title">
+        <a class="portfolio-card portfolio-extra shutterstock-card reveal" href="https://www.shutterstock.com/tr/g/sezginmesut" target="_blank" rel="noopener noreferrer" aria-label="Sezgin Mesut Shutterstock portfolyosunu aç, yeni sekme" style="--card-accent:#ff777b;--portfolio-surface:#28191b;--portfolio-border:#593336;--portfolio-hover:#352125;--reveal-delay:80ms">
+          <div class="portfolio-intro"><span class="portfolio-brand-mark" aria-hidden="true">S</span><div><p class="card-topic">STOK FOTOĞRAF KOLEKSİYONU</p><h2 id="shutterstock-title">Shutterstock</h2></div></div>
+          <div class="portfolio-end"><span>Fotoğrafları incele</span><svg class="portfolio-platform-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 6 1.5-3h5L16 6h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <svg class="portfolio-spark" aria-hidden="true"><use href="#spark"/></svg>
+        </a>
+      </section>
+
+      <section id="mywed-portfolyo" aria-labelledby="mywed-title">
+        <a class="portfolio-card portfolio-extra mywed-card reveal" href="https://mywed.com/tr/photographer/sezginmesut/" target="_blank" rel="noopener noreferrer" aria-label="Sezgin Mesut MyWed portfolyosunu aç, yeni sekme" style="--card-accent:#78cfff;--portfolio-surface:#15232e;--portfolio-border:#304859;--portfolio-hover:#1b2f3e;--reveal-delay:160ms">
+          <div class="portfolio-intro"><span class="portfolio-brand-mark" aria-hidden="true">MW</span><div><p class="card-topic">GELİN DAMAT PORTFOLYOSU</p><h2 id="mywed-title">MyWed</h2></div></div>
+          <div class="portfolio-end"><span>Portfolyoyu incele</span><svg class="portfolio-platform-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/></svg></div>
+          <svg class="portfolio-spark" aria-hidden="true"><use href="#spark"/></svg>
+        </a>
+      </section>
+
+    </main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+'use strict';
+(() => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  if ('IntersectionObserver' in window && !reduced.matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px 25px 0px' });
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+    document.body.classList.add('motion-ready');
+  }
+
+  if (finePointer.matches) {
+    document.querySelectorAll('.channel-card, .instagram-card, .portfolio-card').forEach((card) => {
+      let latest = null;
+      let queued = false;
+      card.addEventListener('pointermove', (event) => {
+        if (reduced.matches) return;
+        latest = { x: event.clientX, y: event.clientY };
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          queued = false;
+          if (!latest) return;
+          const rect = card.getBoundingClientRect();
+          const x = latest.x - rect.left;
+          const y = latest.y - rect.top;
+          card.style.setProperty('--mx', `${x}px`);
+          card.style.setProperty('--my', `${y}px`);
+          card.style.setProperty('--rx', `${(0.5 - y / rect.height) * 5}deg`);
+          card.style.setProperty('--ry', `${(x / rect.width - 0.5) * 5}deg`);
+        });
+      });
+      card.addEventListener('pointerleave', () => {
+        latest = null;
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
+
+  const canvas = document.getElementById('ambient');
+  const context = canvas.getContext('2d');
+  if (!context) return;
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let frame = 0;
+  let lastTime = 0;
+  const resize = () => {
+    width = document.documentElement.clientWidth;
+    height = window.innerHeight;
+    const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    particles = Array.from({ length: width < 620 ? 15 : 32 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.1 + 0.4,
+      speed: Math.random() * 0.22 + 0.08,
+      opacity: Math.random() * 0.18 + 0.06,
+      phase: Math.random() * Math.PI * 2
+    }));
+  };
+  const draw = (time) => {
+    if (document.hidden || reduced.matches) { frame = 0; return; }
+    const step = Math.min((time - (lastTime || time)) / 16.67, 3);
+    lastTime = time;
+    context.clearRect(0, 0, width, height);
+    particles.forEach((particle) => {
+      particle.y -= particle.speed * step;
+      if (particle.y < -3) particle.y = height + 3;
+      const drift = Math.sin(time * 0.00015 + particle.phase) * 10;
+      context.beginPath();
+      context.arc(particle.x + drift, particle.y, particle.radius, 0, Math.PI * 2);
+      context.fillStyle = `rgba(203,255,105,${particle.opacity})`;
+      context.fill();
+    });
+    frame = requestAnimationFrame(draw);
+  };
+  const resume = () => {
+    if (!document.hidden && !reduced.matches && !frame) {
+      lastTime = 0;
+      frame = requestAnimationFrame(draw);
+    } else if (reduced.matches || document.hidden) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      context.clearRect(0, 0, width, height);
+    }
+  };
+  window.addEventListener('resize', resize, { passive: true });
+  document.addEventListener('visibilitychange', resume);
+  reduced.addEventListener('change', resume);
+  resize();
+  resume();
+})();
+</script>
+{% endblock %}

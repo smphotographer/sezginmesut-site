@@ -1,0 +1,6 @@
+# Eski adresler -> yeni adresler (301 kalıcı yönlendirme, Google sıralaması korunur)
+/guncel.html        /blog/                              301
+/guncel             /blog/                              301
+/bursa-blog.html    /blog/istanbul-bursa-honda-sh125/   301
+/bursa-blog         /blog/istanbul-bursa-honda-sh125/   301
+/blog/sayfa/1/      /blog/                              301

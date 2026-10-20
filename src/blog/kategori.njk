@@ -1,0 +1,51 @@
+---
+pagination:
+  data: kategoriler.liste
+  size: 1
+  alias: kategori
+permalink: "/blog/kategori/{{ kategori.slug }}/"
+navActive: blog
+eleventyComputed:
+  title: "{{ kategori.ad }} Yazıları ve Videoları"
+  description: "{{ kategori.aciklama }}"
+  aktifKategori: "{{ kategori.slug }}"
+---
+{% extends "layouts/base.njk" %}
+{% set items = collections.akis | whereCategory(kategori.slug) %}
+{% set noindex = (items | length) == 0 %}
+
+{% block schema %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{{ site.url }}/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}/blog/" },
+      { "@type": "ListItem", "position": 3, "name": {{ kategori.ad | dump | safe }}, "item": "{{ page.url | absUrl(site.url) }}" }
+    ]
+  }
+  </script>
+{% endblock %}
+
+{% block main %}
+    <main id="icerik">
+      <nav class="breadcrumb" aria-label="Konum">
+        <ol><li><a href="/">Ana Sayfa</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">{{ kategori.ad }}</li></ol>
+      </nav>
+      <div class="feed-title">
+        <h1>{{ kategori.ad }}</h1>
+        <p>{{ kategori.aciklama }}</p>
+      </div>
+
+      {% include "partials/cat-nav.njk" %}
+
+      <div class="feed-list">
+        {%- for item in items %}
+{% include "partials/card.njk" %}
+        {%- else %}
+        <p class="empty-note">Bu kategoride henüz paylaşım yok.</p>
+        {%- endfor %}
+      </div>
+    </main>
+{% endblock %}

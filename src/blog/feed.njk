@@ -1,0 +1,26 @@
+---
+permalink: /blog/feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.name }} Blog</title>
+    <link>{{ site.url }}/blog/</link>
+    <atom:link href="{{ site.url }}/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>{{ site.blogDescription }}</description>
+    <language>tr-TR</language>
+    {%- if collections.yazilar.length %}
+    <lastBuildDate>{{ collections.yazilar[0].date | rfcDate }}</lastBuildDate>
+    {%- endif %}
+    {%- for post in collections.yazilar | head(20) %}
+    <item>
+      <title>{{ post.data.title }}</title>
+      <link>{{ post.url | absUrl(site.url) }}</link>
+      <guid isPermaLink="true">{{ post.url | absUrl(site.url) }}</guid>
+      <pubDate>{{ post.date | rfcDate }}</pubDate>
+      <description>{{ post.data.description }}</description>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>

@@ -1,0 +1,74 @@
+---
+pagination:
+  data: collections.akis
+  size: 10
+  alias: items
+permalink: "/blog/{% if pagination.pageNumber > 0 %}sayfa/{{ pagination.pageNumber + 1 }}/{% endif %}"
+navActive: blog
+eleventyComputed:
+  title: "{% if pagination.pageNumber > 0 %}Blog — Sayfa {{ pagination.pageNumber + 1 }}{% else %}Blog: Gezi, Motosiklet, Bahçe ve Ürün Deneyimleri{% endif %}"
+  description: "{{ site.blogDescription }}"
+---
+{% extends "layouts/base.njk" %}
+
+{% block schema %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": "{{ site.url }}/blog/#blog",
+        "name": "{{ site.name }} Blog",
+        "url": "{{ page.url | absUrl(site.url) }}",
+        "description": {{ site.blogDescription | dump | safe }},
+        "inLanguage": "tr-TR",
+        "author": { "@id": "{{ site.url }}/#person" },
+        "blogPost": [
+          {%- for item in items | onlyPosts %}
+          {
+            "@type": "BlogPosting",
+            "headline": {{ item.data.title | dump | safe }},
+            "url": "{{ item.url | absUrl(site.url) }}",
+            "datePublished": "{{ item.date | isoDate }}"
+          }{% if not loop.last %},{% endif %}
+          {%- endfor %}
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{{ site.url }}/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}/blog/" }
+        ]
+      }
+    ]
+  }
+  </script>
+{% endblock %}
+
+{% block main %}
+    <main id="icerik">
+      <div class="feed-title">
+        <h1>{% if pagination.pageNumber > 0 %}Blog <small style="color:var(--muted);font-size:.5em">— Sayfa {{ pagination.pageNumber + 1 }}</small>{% else %}Blog{% endif %}</h1>
+        <p>Motosiklet gezileri, organik bahçe, ahşap işleri, fotoğrafçılık ve ürün deneyimleri. Blog yazıları ve YouTube kanallarımdan son videolar.</p>
+      </div>
+
+      {% include "partials/cat-nav.njk" %}
+
+      <div class="feed-list">
+        {%- for item in items %}
+{% include "partials/card.njk" %}
+        {%- else %}
+        <p class="empty-note">Henüz paylaşım yok.</p>
+        {%- endfor %}
+      </div>
+
+      {%- if pagination.href.previous or pagination.href.next %}
+      <nav class="pager" aria-label="Sayfalar">
+        <span>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" rel="prev"><svg aria-hidden="true"><use href="#arrow-left"/></svg> Daha yeni</a>{% endif %}</span>
+        <span>{% if pagination.href.next %}<a href="{{ pagination.href.next }}" rel="next">Daha eski <svg aria-hidden="true"><use href="#arrow"/></svg></a>{% endif %}</span>
+      </nav>
+      {%- endif %}
+    </main>
+{% endblock %}

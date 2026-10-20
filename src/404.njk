@@ -1,0 +1,16 @@
+---
+permalink: /404.html
+title: "Sayfa bulunamadı"
+description: "Aradığınız sayfa bulunamadı."
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{% extends "layouts/base.njk" %}
+
+{% block main %}
+    <main id="icerik" class="notfound">
+      <h1>404</h1>
+      <p>Aradığınız sayfa taşınmış ya da hiç var olmamış olabilir.</p>
+      <p><a href="/">Ana sayfaya dön</a> · <a href="/blog/">Bloga göz at</a></p>
+    </main>
+{% endblock %}
