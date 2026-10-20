@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: GITHUB_KULLANICI/sezginmesut-site
+  repo: smphotographer/sezginmesut-site
   branch: main
   # GitHub ile giriş için Cloudflare Worker (sveltia-cms-auth) adresi:
   # base_url: https://sveltia-cms-auth.HESAP.workers.dev
