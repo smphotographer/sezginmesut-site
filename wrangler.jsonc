@@ -1,0 +1,13 @@
+// Cloudflare Worker (statik site) ayarları.
+// Cloudflare her GitHub değişikliğinde "npm run build" çalıştırır, sonra _site klasörünü yayınlar.
+// Alan adı (sezginmesut.com) Cloudflare panelinden yönetilir, burada tanımlanmaz.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "shiny-band-eca5",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./_site",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
