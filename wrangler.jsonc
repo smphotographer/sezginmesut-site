@@ -11,8 +11,9 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash",
-    // Sadece giriş adresleri Worker koduna gider; geri kalan her şey doğrudan statik dosyalardan sunulur
-    "run_worker_first": ["/auth", "/callback"]
+    // İstekler önce Worker'dan geçer: www yönlendirmesi ve /auth, /callback girişleri için.
+    // Diğer her şey Worker içinden statik dosyalara aktarılır (ücretsiz plan: günde 100.000 istek).
+    "run_worker_first": true
   },
   // Paneldeki gizli değerler (GITHUB_CLIENT_SECRET) her yayında korunur
   "keep_vars": true,

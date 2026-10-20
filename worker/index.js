@@ -138,7 +138,14 @@ const handleCallback = async (request, env) => {
 
 export default {
   async fetch(request, env) {
-    const { pathname } = new URL(request.url);
+    const url = new URL(request.url);
+    const { pathname } = url;
+
+    // www.sezginmesut.com -> sezginmesut.com (tek adres, kopya içerik olmasın)
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
 
     if (request.method === 'GET' && pathname === '/auth') {
       return handleAuth(request, env);
