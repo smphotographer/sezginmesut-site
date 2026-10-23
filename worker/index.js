@@ -144,6 +144,19 @@ export default {
     // www.sezginmesut.com -> sezginmesut.com (tek adres, kopya içerik olmasın)
     if (url.hostname.startsWith('www.')) {
       url.hostname = url.hostname.slice(4);
+      url.protocol = 'https:';
+      return Response.redirect(url.toString(), 301);
+    }
+
+    if (url.protocol === 'http:') {
+      url.protocol = 'https:';
+      return Response.redirect(url.toString(), 301);
+    }
+
+    // Keep alternate Worker hostnames out of search results.
+    if (url.hostname.endsWith('.workers.dev') && (request.method === 'GET' || request.method === 'HEAD')) {
+      url.hostname = 'sezginmesut.com';
+      url.protocol = 'https:';
       return Response.redirect(url.toString(), 301);
     }
 

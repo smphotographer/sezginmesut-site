@@ -69,6 +69,17 @@ title: "Sezgin Mesut — Fotoğraf, Gezi, Bahçe ve Hobi İçerikleri"
         </div>
       </div>
 
+      <section class="instagram-section" aria-labelledby="son-yazilar-title" style="margin-bottom:40px">
+        <div class="section-heading"><h2 id="son-yazilar-title">Blogdan son yazılar</h2><a href="/blog/">Tüm yazılar →</a></div>
+        {%- for post in collections.yazilar | head(3) %}
+        <a class="portfolio-card" href="{{ post.url }}" style="display:block;margin-top:16px">
+          <h3>{{ post.data.title | escape }}</h3>
+          <p>{{ post.data.description | escape }}</p>
+          <span>Yazıyı oku →</span>
+        </a>
+        {%- endfor %}
+      </section>
+
       <section class="instagram-section" id="instagram-hesaplari" aria-labelledby="instagram-title">
         <div class="section-heading reveal"><h2 id="instagram-title"><svg class="platform-icon"><use href="#instagram"/></svg> Instagram hesapları</h2><span class="section-count">02 / 03</span></div>
         <div class="instagram-grid">

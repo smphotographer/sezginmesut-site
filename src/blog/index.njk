@@ -2,9 +2,11 @@
 pagination:
   data: collections.akis
   size: 10
+  addAllPagesToCollections: true
   alias: items
 permalink: "/blog/{% if pagination.pageNumber > 0 %}sayfa/{{ pagination.pageNumber + 1 }}/{% endif %}"
 navActive: blog
+tags: blogPages
 eleventyComputed:
   title: "{% if pagination.pageNumber > 0 %}Blog — Sayfa {{ pagination.pageNumber + 1 }}{% else %}Blog: Gezi, Motosiklet, Bahçe ve Ürün Deneyimleri{% endif %}"
   description: "{{ site.blogDescription }}"

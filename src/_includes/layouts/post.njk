@@ -103,7 +103,7 @@
         <section class="video-section" aria-labelledby="video-baslik">
           <h2 id="video-baslik">Video Deneyimi</h2>
           <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/{{ ytId }}" title="{{ title }} — YouTube videosu" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/{{ ytId }}?enablejsapi=1" title="{{ title | escape }} — YouTube videosu" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </section>
         {%- endif %}

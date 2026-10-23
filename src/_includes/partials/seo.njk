@@ -3,8 +3,8 @@
 {%- set _desc = description or site.description -%}
 {%- set _url = page.url | absUrl(site.url) -%}
 {%- set _img = (cover or site.defaultImage) | absUrl(site.url) -%}
-  <title>{{ _title }}</title>
-  <meta name="description" content="{{ _desc }}">
+  <title>{{ _title | escape }}</title>
+  <meta name="description" content="{{ _desc | escape }}">
   <meta name="author" content="{{ site.name }}">
   <meta name="robots" content="{{ 'noindex, follow' if noindex else 'index, follow, max-image-preview:large' }}">
   <link rel="canonical" href="{{ _url }}">
@@ -12,8 +12,8 @@
   <meta property="og:site_name" content="{{ site.name }}">
   <meta property="og:locale" content="{{ site.locale }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">
-  <meta property="og:title" content="{{ seoTitle or title or site.title }}">
-  <meta property="og:description" content="{{ _desc }}">
+  <meta property="og:title" content="{{ (seoTitle or title or site.title) | escape }}">
+  <meta property="og:description" content="{{ _desc | escape }}">
   <meta property="og:url" content="{{ _url }}">
   <meta property="og:image" content="{{ _img }}">
   {%- if coverAlt %}
@@ -25,6 +25,6 @@
   <meta property="article:author" content="{{ site.url }}/">
   {%- endif %}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ seoTitle or title or site.title }}">
-  <meta name="twitter:description" content="{{ _desc }}">
+  <meta name="twitter:title" content="{{ (seoTitle or title or site.title) | escape }}">
+  <meta name="twitter:description" content="{{ _desc | escape }}">
   <meta name="twitter:image" content="{{ _img }}">

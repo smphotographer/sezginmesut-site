@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10120f">
+  {%- if site.gtmId and not noindex %}
+  <!-- Google Tag Manager: GA4 is configured in this container. -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ site.gtmId }}');
+  </script>
+  {%- endif %}
 {% include "partials/seo.njk" %}
   <link rel="icon" type="image/png" href="/gorseller/favicon-siyah.png">
   <link rel="alternate" type="application/rss+xml" title="{{ site.name }} Blog" href="{{ site.url }}/blog/feed.xml">
@@ -11,7 +21,7 @@
   <style>
 {% block styles %}{% include "partials/blog.css" %}{% endblock %}
   </style>
-  {%- if site.gaId %}
+  {%- if site.gaId and not site.gtmId and not noindex %}
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
   <script>
@@ -23,6 +33,9 @@
   {%- endif %}
 </head>
 <body>
+  {%- if site.gtmId and not noindex %}
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtmId }}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+  {%- endif %}
   <a class="skip" href="#icerik">İçeriğe geç</a>
   {% if isHome %}<canvas id="ambient" aria-hidden="true"></canvas>{% endif %}
   <div class="ambient-glow" aria-hidden="true"></div>

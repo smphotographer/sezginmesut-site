@@ -15,11 +15,11 @@ eleventyExcludeFromCollections: true
     {%- endif %}
     {%- for post in collections.yazilar | head(20) %}
     <item>
-      <title>{{ post.data.title }}</title>
+      <title>{{ post.data.title | escape }}</title>
       <link>{{ post.url | absUrl(site.url) }}</link>
       <guid isPermaLink="true">{{ post.url | absUrl(site.url) }}</guid>
       <pubDate>{{ post.date | rfcDate }}</pubDate>
-      <description>{{ post.data.description }}</description>
+      <description>{{ post.data.description | escape }}</description>
     </item>
     {%- endfor %}
   </channel>

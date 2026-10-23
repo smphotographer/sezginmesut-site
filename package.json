@@ -5,6 +5,7 @@
   "description": "sezginmesut.com — Eleventy ile üretilen statik site ve Sveltia CMS yönetim paneli",
   "scripts": {
     "build": "eleventy",
+    "check:seo": "node scripts/check-seo.mjs",
     "start": "eleventy --serve"
   },
   "engines": {
