@@ -48,6 +48,10 @@ Komrat’ta Atatürk Kütüphanesi’ne vardığımızda içeride 29 Ekim tören
 
 Daha sonra katedral bahçesinde sohbet eden insanlara katıldık. Türkiye’den, Bulgaristan’dan, nerede doğup nerede yaşadığımızdan konuştuk. Bazı kelimeler farklıydı ama anlaşmak kolaylaştı. Havalimanındaki gerginliğin ardından bu sıcak sohbet iyi geldi. Ardından Türk bir esnafın işlettiği dönercide yemek yedik.
 
+![Komrat merkezindeki sarı cepheli Aziz Yahya Katedrali](https://upload.wikimedia.org/wikipedia/commons/6/6c/Comrat.jpg)
+
+*Komrat Katedrali. Fotoğraf: [Serhiiplucci / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Comrat.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Görsel değiştirilmemiştir.*
+
 ## Kişinev’de Yemek ve Pazar Gezisi
 
 Birkaç kez Andy’s Pizza’yı tercih ettik. Ziyaretimiz sırasında fiyatlarını ortalama, lezzetini iyi buldum. Bir akşam da La Plăcinte’de yemek yedik.
@@ -57,6 +61,10 @@ Büyük pazar alanında sebzelerden takılara, saatlerden kurabiyelere kadar pek
 ## Dönüş Öncesi Valea Morilor
 
 Son gün Valea Morilor Parkı’nda göl çevresinde yürüdük, merdivenlerde ve teraslarda vakit geçirdik. Son yemeğimizi bir İtalyan restoranında yedik. Dört peynirli pizza çok lezzetliydi; fakat ardından havalimanına yetişmek biraz telaşlı oldu.
+
+![Kişinev Valea Morilor Parkı gölü ve çevresindeki yeşil alanların havadan görünümü](https://upload.wikimedia.org/wikipedia/commons/0/05/Parcul_Valea_Morilor._Foto_2.jpg)
+
+*Valea Morilor Parkı. Fotoğraf: [Rodion Gavriloi / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Parcul_Valea_Morilor._Foto_2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Görsel değiştirilmemiştir.*
 
 ## Moldova’dan Aklımda Kalanlar
 
