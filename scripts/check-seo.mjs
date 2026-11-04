@@ -30,8 +30,15 @@ for (const url of urls) {
   assert(fs.existsSync(file), `Missing sitemap page: ${file}`);
   assert(!fs.readFileSync(file, 'utf8').includes('noindex'), `Noindex sitemap page: ${file}`);
 }
-assert(!sitemap.includes('/kategori/ahsap/'), 'Empty category in sitemap');
-assert(fs.readFileSync('_site/index.html', 'utf8').includes('href="/blog/istanbul-bursa-honda-sh125/"'), 'Homepage discovery link');
+// Category population changes as editors publish articles and videos.
+for (const category of JSON.parse(fs.readFileSync('src/_data/kategoriler.json', 'utf8')).liste) {
+  const url = `https://sezginmesut.com/blog/kategori/${category.slug}/`;
+  const html = fs.readFileSync(path.join('_site/blog/kategori', category.slug, 'index.html'), 'utf8');
+  assert.equal(urls.includes(url), !html.includes('noindex'), `Category sitemap visibility: ${category.slug}`);
+}
+const homepage = fs.readFileSync('_site/index.html', 'utf8');
+const discoveredPosts = [...homepage.matchAll(/href="(\/blog\/[^/]+\/)"/g)].filter(match => fs.existsSync(path.join('_site', match[1], 'index.html')));
+assert(discoveredPosts.length > 0, 'Homepage article discovery links');
 for (const input of ['http://sezginmesut.com/blog/?x=1', 'https://www.sezginmesut.com/blog/?x=1', 'https://shiny-band-eca5.sezgindesigner.workers.dev/blog/?x=1']) {
   const response = await worker.fetch(new Request(input), {});
   assert.equal(response.status, 301);

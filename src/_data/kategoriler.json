@@ -24,6 +24,11 @@
       "ad": "Ürün Deneyimi",
       "slug": "urun-deneyimi",
       "aciklama": "Gerçek kullanıma dayalı ürün incelemeleri ve deneyim raporları."
+    },
+    {
+      "ad": "Tasarım ve Teknoloji",
+      "slug": "tasarim-teknoloji",
+      "aciklama": "Yaratıcı projeler, etkileşimli simülatörler, dijital tasarım ve teknoloji üzerine notlar."
     }
   ]
 }
