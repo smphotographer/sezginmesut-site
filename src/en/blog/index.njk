@@ -1,0 +1,77 @@
+---
+pagination:
+  data: collections.feedEn
+  size: 10
+  addAllPagesToCollections: true
+  alias: items
+permalink: "/en/blog/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}"
+navActive: blog
+tags: blogPagesEn
+eleventyComputed:
+  translationOf: "/blog/{% if pagination.pageNumber > 0 %}sayfa/{{ pagination.pageNumber + 1 }}/{% endif %}"
+  title: "{% if pagination.pageNumber > 0 %}Blog — Page {{ pagination.pageNumber + 1 }}{% else %}Blog: Photography, Travel, Gardening and Hobbies{% endif %}"
+  description: "{{ site.blogDescription }}"
+---
+{% extends "layouts/base.njk" %}
+
+{% block schema %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": "{{ site.url }}{{ blogPath }}#blog",
+        "name": "{{ site.name }} Blog",
+        "url": "{{ page.url | absUrl(site.url) }}",
+        "description": {{ site.blogDescription | dump | safe }},
+        "inLanguage": "{{ languageTag }}",
+        "author": { "@id": "{{ site.url }}/#person" },
+        "blogPost": [
+          {%- for item in items | onlyPosts %}
+          {
+            "@type": "BlogPosting",
+            "headline": {{ item.data.title | dump | safe }},
+            "url": "{{ item.url | absUrl(site.url) }}",
+            "datePublished": "{{ item.date | isoDate }}"
+          }{% if not loop.last %},{% endif %}
+          {%- endfor %}
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": {{ ui.home | dump | safe }}, "item": "{{ site.url }}{{ homePath }}" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}{{ blogPath }}" }
+        ]
+      }
+    ]
+  }
+  </script>
+{% endblock %}
+
+{% block main %}
+    <main id="icerik">
+      <div class="feed-title">
+        <h1>{% if pagination.pageNumber > 0 %}Blog <small style="color:var(--muted);font-size:.5em">— {{ ui.page }} {{ pagination.pageNumber + 1 }}</small>{% else %}Blog{% endif %}</h1>
+        <p>{{ ui.blogIntro }}</p>
+      </div>
+
+      {% include "partials/cat-nav.njk" %}
+
+      <div class="feed-list">
+        {%- for item in items %}
+{% include "partials/card.njk" %}
+        {%- else %}
+        <p class="empty-note">{{ ui.noPosts }}</p>
+        {%- endfor %}
+      </div>
+
+      {%- if pagination.href.previous or pagination.href.next %}
+      <nav class="pager" aria-label="{{ ui.pages }}">
+        <span>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" rel="prev"><svg aria-hidden="true"><use href="#arrow-left"/></svg> {{ ui.newer }}</a>{% endif %}</span>
+        <span>{% if pagination.href.next %}<a href="{{ pagination.href.next }}" rel="next">{{ ui.older }} <svg aria-hidden="true"><use href="#arrow"/></svg></a>{% endif %}</span>
+      </nav>
+      {%- endif %}
+    </main>
+{% endblock %}

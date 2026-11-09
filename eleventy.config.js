@@ -1,5 +1,7 @@
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 
+import { languagePair } from "./src/_data/languages.js";
+
 const AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
 const toDate = (value) => (value instanceof Date ? value : new Date(value));
@@ -7,6 +9,12 @@ const byDateDesc = (a, b) => b.date - a.date;
 const isPublished = (item) => !item.data.draft;
 
 export default function (eleventyConfig) {
+  eleventyConfig.addFilter("languagePair", languagePair);
+  eleventyConfig.addFilter("dateLabel", (value,lang) => lang==='en' ? toDate(value).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}) : `${toDate(value).getUTCDate()} ${AYLAR[toDate(value).getUTCMonth()]} ${toDate(value).getUTCFullYear()}`);
+  eleventyConfig.addFilter("searchItems", (items=[]) => items.map(p=>({title:p.data.title,description:p.data.description||'',url:p.data.url||p.url,tags:p.data.etiketler||[],category:p.data.category||'',categoryName:p.data.kategoriler?.liste?.find(c=>c.slug===p.data.category)?.ad||'',image:p.data.thumbnail||p.data.cover||'',alt:p.data.coverAlt||p.data.title,video:!!p.data.url})));
+  eleventyConfig.addCollection("postsEn", api=>api.getFilteredByGlob("src/en/blog/posts/*.md").filter(isPublished).sort(byDateDesc));
+  eleventyConfig.addCollection("feedEn", api=>api.getFilteredByGlob(["src/en/blog/posts/*.md","src/en/videos/*.md"]).filter(isPublished).sort(byDateDesc));
+  eleventyConfig.addPassthroughCopy("src/assets");
   // --- Statik dosyalar ---------------------------------------------------
   eleventyConfig.addPassthroughCopy("src/gorseller");
   eleventyConfig.addPassthroughCopy("src/admin");

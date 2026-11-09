@@ -1,0 +1,53 @@
+---
+pagination:
+  addAllPagesToCollections: true
+  data: categoriesEn.liste
+  size: 1
+  alias: kategori
+permalink: "/en/blog/category/{{ kategori.slug }}/"
+navActive: blog
+eleventyComputed:
+  translationOf: "/blog/kategori/{{ kategori.trSlug }}/"
+  title: "{{ kategori.ad }} Articles and Videos"
+  description: "{{ kategori.aciklama }}"
+  aktifKategori: "{{ kategori.slug }}"
+---
+{% extends "layouts/base.njk" %}
+{% set items = collections.feedEn | whereCategory(kategori.slug) %}
+{% set noindex = (items | length) == 0 %}
+
+{% block schema %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": {{ ui.home | dump | safe }}, "item": "{{ site.url }}{{ homePath }}" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}{{ blogPath }}" },
+      { "@type": "ListItem", "position": 3, "name": {{ kategori.ad | dump | safe }}, "item": "{{ page.url | absUrl(site.url) }}" }
+    ]
+  }
+  </script>
+{% endblock %}
+
+{% block main %}
+    <main id="icerik">
+      <nav class="breadcrumb" aria-label="{{ ui.home }}">
+        <ol><li><a href="{{ homePath }}">{{ ui.home }}</a></li><li><a href="{{ blogPath }}">Blog</a></li><li aria-current="page">{{ kategori.ad }}</li></ol>
+      </nav>
+      <div class="feed-title">
+        <h1>{{ kategori.ad }}</h1>
+        <p>{{ kategori.aciklama }}</p>
+      </div>
+
+      {% include "partials/cat-nav.njk" %}
+
+      <div class="feed-list">
+        {%- for item in items %}
+{% include "partials/card.njk" %}
+        {%- else %}
+        <p class="empty-note">{{ ui.categoryNone }}</p>
+        {%- endfor %}
+      </div>
+    </main>
+{% endblock %}

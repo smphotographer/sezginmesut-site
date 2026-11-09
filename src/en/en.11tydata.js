@@ -1,0 +1,3 @@
+import i18n from '../_data/i18n.js';
+import categories from './categories.json' with {type:'json'};
+export default {lang:'en',languageTag:'en-GB',locale:'en_GB',rootPath:'/en',homePath:'/en/',blogPath:'/en/blog/',categoryPath:'/en/blog/category/',searchPath:'/en/search/',ui:i18n.en,kategoriler:categories,categoriesEn:categories,site:{title:'Sezgin Mesut — Photography, Travel, Gardening and Hobbies',description:'Photography, motorcycle adventures, gardening, woodworking and product experiences: articles, videos and portfolios by Sezgin Mesut.',blogDescription:'Stories about photography, motorcycle trips, gardening, woodworking and hands-on product experiences.'}};

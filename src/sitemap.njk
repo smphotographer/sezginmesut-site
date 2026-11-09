@@ -4,29 +4,14 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>{{ site.url }}/</loc>
-  </url>
-  <url>
-    <loc>{{ site.url }}/blog/</loc>
-  </url>
-  {%- for kat in kategoriler.liste %}
-  {%- set katItems = collections.akis | whereCategory(kat.slug) %}
-  {%- if katItems.length %}
-  <url>
-    <loc>{{ site.url }}/blog/kategori/{{ kat.slug }}/</loc>
-  </url>
-  {%- endif %}
-  {%- endfor %}
-  {%- for post in collections.yazilar %}
-  <url>
-    <loc>{{ post.url | absUrl(site.url) | escape }}</loc>
-    <lastmod>{{ (post.data.updated or post.date) | isoDate }}</lastmod>
-  </url>
-  {%- endfor %}
-  {%- for listing in collections.blogPages %}
-  {%- if listing.url != '/blog/' %}
-  <url><loc>{{ listing.url | absUrl(site.url) | escape }}</loc></url>
-  {%- endif %}
-  {%- endfor %}
+{%- for p in collections.all %}
+{%- if p.url and (p.url == '/' or p.url == '/en/' or p.url.startsWith('/blog/') or p.url.startsWith('/en/blog/')) and not p.url.endsWith('.xml') %}
+{%- set include = true %}
+{%- if p.data.kategori %}
+{%- set feed = collections.akis %}{% if p.data.lang == 'en' %}{% set feed = collections.feedEn %}{% endif %}
+{%- if (feed | whereCategory(p.data.kategori.slug) | length) == 0 %}{% set include = false %}{% endif %}
+{%- endif %}
+{%- if include %}<url><loc>{{ p.url | absUrl(site.url) | escape }}</loc>{% if p.data.ogType == 'article' %}<lastmod>{{ (p.data.updated or p.date) | isoDate }}</lastmod>{% endif %}</url>{% endif %}
+{%- endif %}
+{%- endfor %}
 </urlset>

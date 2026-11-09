@@ -1,5 +1,6 @@
 ---
 pagination:
+  addAllPagesToCollections: true
   data: kategoriler.liste
   size: 1
   alias: kategori
@@ -20,8 +21,8 @@ eleventyComputed:
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{{ site.url }}/" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}/blog/" },
+      { "@type": "ListItem", "position": 1, "name": {{ ui.home | dump | safe }}, "item": "{{ site.url }}{{ homePath }}" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}{{ blogPath }}" },
       { "@type": "ListItem", "position": 3, "name": {{ kategori.ad | dump | safe }}, "item": "{{ page.url | absUrl(site.url) }}" }
     ]
   }
@@ -30,8 +31,8 @@ eleventyComputed:
 
 {% block main %}
     <main id="icerik">
-      <nav class="breadcrumb" aria-label="Konum">
-        <ol><li><a href="/">Ana Sayfa</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">{{ kategori.ad }}</li></ol>
+      <nav class="breadcrumb" aria-label="{{ ui.home }}">
+        <ol><li><a href="{{ homePath }}">{{ ui.home }}</a></li><li><a href="{{ blogPath }}">Blog</a></li><li aria-current="page">{{ kategori.ad }}</li></ol>
       </nav>
       <div class="feed-title">
         <h1>{{ kategori.ad }}</h1>
@@ -44,7 +45,7 @@ eleventyComputed:
         {%- for item in items %}
 {% include "partials/card.njk" %}
         {%- else %}
-        <p class="empty-note">Bu kategoride henüz paylaşım yok.</p>
+        <p class="empty-note">{{ ui.categoryNone }}</p>
         {%- endfor %}
       </div>
     </main>

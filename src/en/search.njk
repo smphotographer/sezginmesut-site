@@ -1,0 +1,20 @@
+---
+permalink: /en/search/
+title: Search this site
+description: Search articles and videos by Sezgin Mesut.
+navActive: search
+noindex: true
+translationOf: /arama/
+---
+{% extends "layouts/base.njk" %}
+{% block main %}
+<main id="icerik">
+  <div class="feed-title"><h1>{{ ui.searchTitle }}</h1><p>{{ ui.searchIntro }}</p></div>
+  <form class="search-form" role="search" action="{{ searchPath }}" method="get"><label class="search-input-label" for="site-query" hidden>{{ ui.searchLabel }}</label><input type="search" id="site-query" name="q" aria-label="{{ ui.searchLabel }}" placeholder="{{ ui.searchPlaceholder }}" maxlength="160" autocomplete="off"><button type="submit">{{ ui.search }}</button></form>
+  <p class="search-status" id="search-status" role="status" aria-live="polite">{{ ui.searchEmpty }}</p>
+  <div id="search-results" class="feed-list search-results"></div>
+  <noscript><p>{{ ui.searchError }} <a href="{{ blogPath }}">{{ ui.allPosts }}</a></p></noscript>
+  <div id="search-config" data-index="{{ rootPath }}/search-index.json" data-lang="{{ lang }}" data-empty="{{ ui.searchEmpty }}" data-none="{{ ui.searchNone }}" data-loading="{{ ui.searchLoading }}" data-error="{{ ui.searchError }}" data-results="{{ ui.results }}" data-read="{{ ui.read }}" data-watch="{{ ui.watch }}"></div>
+</main>
+{% endblock %}
+{% block scripts %}<script src="/assets/search.js" defer></script>{% endblock %}

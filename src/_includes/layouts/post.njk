@@ -1,7 +1,7 @@
 {% extends "layouts/base.njk" %}
 {%- set kat = kategoriler.liste | findBy("slug", category) -%}
 {%- set ytId = youtube | youtubeId -%}
-{%- set current = collections.yazilar | findBy("url", page.url) -%}
+{%- set current = collections.all | findBy("url", page.url) -%}
 
 {% block schema %}
   <script type="application/ld+json">
@@ -17,7 +17,7 @@
         "image": ["{{ (cover or site.defaultImage) | absUrl(site.url) }}"],
         "datePublished": "{{ page.date | isoDate }}",
         "dateModified": "{{ (updated or page.date) | isoDate }}",
-        "inLanguage": "tr-TR",
+        "inLanguage": "{{ languageTag }}",
         {%- if kat %}
         "articleSection": {{ kat.ad | dump | safe }},
         {%- endif %}
@@ -41,10 +41,10 @@
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{{ site.url }}/" },
-          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}/blog/" },
+          { "@type": "ListItem", "position": 1, "name": {{ ui.home | dump | safe }}, "item": "{{ site.url }}{{ homePath }}" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}{{ blogPath }}" },
           {%- if kat %}
-          { "@type": "ListItem", "position": 3, "name": {{ kat.ad | dump | safe }}, "item": "{{ site.url }}/blog/kategori/{{ kat.slug }}/" },
+          { "@type": "ListItem", "position": 3, "name": {{ kat.ad | dump | safe }}, "item": "{{ site.url }}{{ categoryPath }}{{ kat.slug }}/" },
           { "@type": "ListItem", "position": 4, "name": {{ title | dump | safe }} }
           {%- else %}
           { "@type": "ListItem", "position": 3, "name": {{ title | dump | safe }} }
@@ -58,22 +58,22 @@
 
 {% block main %}
     <main id="icerik" class="article-wrap">
-      <nav class="breadcrumb" aria-label="Konum">
+      <nav class="breadcrumb" aria-label="{{ ui.home }}">
         <ol>
-          <li><a href="/">Ana Sayfa</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          {%- if kat %}<li><a href="/blog/kategori/{{ kat.slug }}/">{{ kat.ad }}</a></li>{% endif %}
+          <li><a href="{{ homePath }}">{{ ui.home }}</a></li>
+          <li><a href="{{ blogPath }}">Blog</a></li>
+          {%- if kat %}<li><a href="{{ categoryPath }}{{ kat.slug }}/">{{ kat.ad }}</a></li>{% endif %}
         </ol>
       </nav>
 
       <article>
         <header class="article-header">
           <div class="article-meta">
-            <span>Yazar: {{ site.name }}</span>
-            <time datetime="{{ page.date | isoDate }}">{{ page.date | trDate }}</time>
-            {%- if updated %}<span>Güncellendi: <time datetime="{{ updated | isoDate }}">{{ updated | trDate }}</time></span>{% endif %}
-            <span>{{ content | readingTime }} dk okuma</span>
-            {%- if kat %}<a href="/blog/kategori/{{ kat.slug }}/">{{ kat.ad }}</a>{% endif %}
+            <span>{{ ui.author }}: {{ site.name }}</span>
+            <time datetime="{{ page.date | isoDate }}">{{ page.date | dateLabel(lang) }}</time>
+            {%- if updated %}<span>{{ ui.updated }}: <time datetime="{{ updated | isoDate }}">{{ updated | dateLabel(lang) }}</time></span>{% endif %}
+            <span>{{ content | readingTime }} {{ ui.minutes }}</span>
+            {%- if kat %}<a href="{{ categoryPath }}{{ kat.slug }}/">{{ kat.ad }}</a>{% endif %}
           </div>
           <h1>{{ title }}</h1>
           {%- if description %}<p class="article-lead">{{ description }}</p>{% endif %}
@@ -92,7 +92,7 @@
 
         {%- if etiketler and etiketler.length %}
         <div class="article-tags">
-          <span>Etiketler:</span>
+          <span>{{ ui.tags }}:</span>
           {%- for etiket in etiketler %}
           <span class="tag-item">#{{ etiket }}</span>
           {%- endfor %}
@@ -101,18 +101,20 @@
 
         {%- if ytId %}
         <section class="video-section" aria-labelledby="video-baslik">
-          <h2 id="video-baslik">Video Deneyimi</h2>
+          <h2 id="video-baslik">{{ ui.video }}</h2>
+          {% if lang == "en" %}<p class="video-language">{{ ui.videoLang }}</p>{% endif %}
           <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/{{ ytId }}?enablejsapi=1" title="{{ title | escape }} — YouTube videosu" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/{{ ytId }}?enablejsapi=1" title="{{ title | escape }} — YouTube" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </section>
         {%- endif %}
       </article>
 
-      {%- set benzerler = collections.akis | related(current or { url: page.url, data: { category: category } }) %}
+      {%- set relatedFeed = collections.akis %}{% if lang == "en" %}{% set relatedFeed = collections.feedEn %}{% endif %}
+      {%- set benzerler = relatedFeed | related(current or { url: page.url, data: { category: category } }) %}
       {%- if benzerler.length %}
       <section class="related" aria-labelledby="benzer-baslik">
-        <h2 id="benzer-baslik">Bunlar da ilginizi çekebilir</h2>
+        <h2 id="benzer-baslik">{{ ui.related }}</h2>
         <div class="feed-list">
           {%- for item in benzerler %}
 {% include "partials/card.njk" %}
@@ -121,6 +123,6 @@
       </section>
       {%- endif %}
 
-      <p style="margin-top:40px"><a href="/blog/" class="back-link"><svg aria-hidden="true"><use href="#arrow-left"/></svg> Tüm yazılara dön</a></p>
+      <p style="margin-top:40px"><a href="{{ blogPath }}" class="back-link"><svg aria-hidden="true"><use href="#arrow-left"/></svg> {{ ui.back }}</a></p>
     </main>
 {% endblock %}

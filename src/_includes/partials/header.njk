@@ -1,10 +1,16 @@
     <header class="header{% if isHome %} enter{% endif %}">
-      <a class="wordmark custom-wordmark" href="/" aria-label="Sezgin Mesut, ana sayfa"><img class="site-logo" src="/gorseller/ust-logo-beyaz.jpg" width="84" height="84" alt="Sezgin Mesut logosu" eleventy:ignore></a>
-      <nav aria-label="Ana menü">
-        <a href="/blog/"{% if navActive == "blog" %} class="active" aria-current="page"{% endif %}>Blog</a>
-        <a href="/#youtube-kanallari">YouTube</a>
-        <a href="/#instagram-hesaplari">Instagram</a>
-        <a href="/#portfolyo">Portfolyo</a>
+      <a class="wordmark custom-wordmark" href="{{ homePath }}" aria-label="{{ ui.homeLink }}"><img class="site-logo" src="/gorseller/sezgin-mesut-transparent.png" width="84" height="84" alt="{{ ui.logoAlt }}" eleventy:ignore></a>
+      <nav aria-label="{{ ui.menu }}">
+        <a href="{{ blogPath }}"{% if navActive == "blog" %} class="active" aria-current="page"{% endif %}>Blog</a>
+        <a href="{{ homePath }}#youtube-kanallari">YouTube</a>
+        <a href="{{ homePath }}#instagram-hesaplari">Instagram</a>
+        <a href="{{ homePath }}#portfolyo">{{ ui.portfolio }}</a>
       </nav>
-      <span class="header-note">MERAKIN PEŞİNDE <svg aria-hidden="true"><use href="#spark"/></svg></span>
+      <div class="header-tools">
+        <a class="search-toggle" href="{{ searchPath }}" aria-label="{{ ui.searchLabel }}"{% if navActive == "search" %} aria-current="page"{% endif %}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>{{ ui.search }}</span></a>
+        {%- set pair = page.url | languagePair(collections.all) %}
+        <div class="language-switch" role="navigation" aria-label="{{ ui.language }}">
+          <a href="{{ pair.tr if pair else '/' }}" lang="tr" hreflang="tr"{% if lang == 'tr' %} aria-current="page"{% endif %}>TR</a><span aria-hidden="true">/</span><a href="{{ pair.en if pair else '/en/' }}" lang="en" hreflang="en"{% if lang == 'en' %} aria-current="page"{% endif %}>EN</a>
+        </div>
+      </div>
     </header>

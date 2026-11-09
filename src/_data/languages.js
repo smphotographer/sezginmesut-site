@@ -1,0 +1,1 @@
+export function languagePair(url,pages=[]){const current=pages.find(p=>p.url===url);if(current?.data.translationOf){const tr=pages.find(p=>p.url===current.data.translationOf&&!p.data.draft);return tr?{tr:tr.url,en:url}:null;}const en=pages.find(p=>p.data.translationOf===url&&!p.data.draft);return en?{tr:url,en:en.url}:null;}

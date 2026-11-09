@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr">
+<html lang="{{ lang }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,11 +15,12 @@
   </script>
   {%- endif %}
 {% include "partials/seo.njk" %}
-  <link rel="icon" type="image/png" href="/gorseller/favicon-siyah.png">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} Blog" href="{{ site.url }}/blog/feed.xml">
+  <link rel="icon" type="image/png" href="/gorseller/favicon.png">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} Blog" href="{{ site.url }}{{ blogPath }}feed.xml">
   {% block schema %}{% endblock %}
   <style>
 {% block styles %}{% include "partials/blog.css" %}{% endblock %}
+{% include "partials/enhancements.css" %}
   </style>
   {%- if site.gaId and not site.gtmId and not noindex %}
   <!-- Google tag (gtag.js) -->
@@ -36,14 +37,14 @@
   {%- if site.gtmId and not noindex %}
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtmId }}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
   {%- endif %}
-  <a class="skip" href="#icerik">İçeriğe geç</a>
+  <a class="skip" href="#icerik">{{ ui.skip }}</a>
   {% if isHome %}<canvas id="ambient" aria-hidden="true"></canvas>{% endif %}
   <div class="ambient-glow" aria-hidden="true"></div>
 {% include "partials/sprite.njk" %}
   <div class="page">
 {% include "partials/header.njk" %}
 {% block main %}{% endblock %}
-    <footer class="footer{% if isHome %} reveal{% endif %}"><span>© <span id="year">{{ build.year }}</span> {{ site.name }}</span><span>Merak hiç bitmesin.<svg aria-hidden="true"><use href="#spark"/></svg></span></footer>
+    <footer class="footer{% if isHome %} reveal{% endif %}"><span>© <span id="year">{{ build.year }}</span> {{ site.name }}</span><span>{{ ui.footer }}<svg aria-hidden="true"><use href="#spark"/></svg></span></footer>
   </div>
 {% block scripts %}{% endblock %}
 </body>

@@ -8,7 +8,7 @@ permalink: "/blog/{% if pagination.pageNumber > 0 %}sayfa/{{ pagination.pageNumb
 navActive: blog
 tags: blogPages
 eleventyComputed:
-  title: "{% if pagination.pageNumber > 0 %}Blog — Sayfa {{ pagination.pageNumber + 1 }}{% else %}Blog: Gezi, Motosiklet, Bahçe ve Ürün Deneyimleri{% endif %}"
+  title: "{% if pagination.pageNumber > 0 %}Blog — {{ ui.page }} {{ pagination.pageNumber + 1 }}{% else %}Blog: Gezi, Motosiklet, Bahçe ve Ürün Deneyimleri{% endif %}"
   description: "{{ site.blogDescription }}"
 ---
 {% extends "layouts/base.njk" %}
@@ -20,11 +20,11 @@ eleventyComputed:
     "@graph": [
       {
         "@type": "Blog",
-        "@id": "{{ site.url }}/blog/#blog",
+        "@id": "{{ site.url }}{{ blogPath }}#blog",
         "name": "{{ site.name }} Blog",
         "url": "{{ page.url | absUrl(site.url) }}",
         "description": {{ site.blogDescription | dump | safe }},
-        "inLanguage": "tr-TR",
+        "inLanguage": "{{ languageTag }}",
         "author": { "@id": "{{ site.url }}/#person" },
         "blogPost": [
           {%- for item in items | onlyPosts %}
@@ -40,8 +40,8 @@ eleventyComputed:
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{{ site.url }}/" },
-          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}/blog/" }
+          { "@type": "ListItem", "position": 1, "name": {{ ui.home | dump | safe }}, "item": "{{ site.url }}{{ homePath }}" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}{{ blogPath }}" }
         ]
       }
     ]
@@ -52,8 +52,8 @@ eleventyComputed:
 {% block main %}
     <main id="icerik">
       <div class="feed-title">
-        <h1>{% if pagination.pageNumber > 0 %}Blog <small style="color:var(--muted);font-size:.5em">— Sayfa {{ pagination.pageNumber + 1 }}</small>{% else %}Blog{% endif %}</h1>
-        <p>Motosiklet gezileri, organik bahçe, ahşap işleri, fotoğrafçılık ve ürün deneyimleri. Blog yazıları ve YouTube kanallarımdan son videolar.</p>
+        <h1>{% if pagination.pageNumber > 0 %}Blog <small style="color:var(--muted);font-size:.5em">— {{ ui.page }} {{ pagination.pageNumber + 1 }}</small>{% else %}Blog{% endif %}</h1>
+        <p>{{ ui.blogIntro }}</p>
       </div>
 
       {% include "partials/cat-nav.njk" %}
@@ -62,14 +62,14 @@ eleventyComputed:
         {%- for item in items %}
 {% include "partials/card.njk" %}
         {%- else %}
-        <p class="empty-note">Henüz paylaşım yok.</p>
+        <p class="empty-note">{{ ui.noPosts }}</p>
         {%- endfor %}
       </div>
 
       {%- if pagination.href.previous or pagination.href.next %}
-      <nav class="pager" aria-label="Sayfalar">
-        <span>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" rel="prev"><svg aria-hidden="true"><use href="#arrow-left"/></svg> Daha yeni</a>{% endif %}</span>
-        <span>{% if pagination.href.next %}<a href="{{ pagination.href.next }}" rel="next">Daha eski <svg aria-hidden="true"><use href="#arrow"/></svg></a>{% endif %}</span>
+      <nav class="pager" aria-label="{{ ui.pages }}">
+        <span>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" rel="prev"><svg aria-hidden="true"><use href="#arrow-left"/></svg> {{ ui.newer }}</a>{% endif %}</span>
+        <span>{% if pagination.href.next %}<a href="{{ pagination.href.next }}" rel="next">{{ ui.older }} <svg aria-hidden="true"><use href="#arrow"/></svg></a>{% endif %}</span>
       </nav>
       {%- endif %}
     </main>

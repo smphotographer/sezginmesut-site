@@ -16,11 +16,11 @@
               <span class="feed-badge">
                 {%- if isVideo %}<svg aria-hidden="true"><use href="#youtube"/></svg> {{ item.data.channel or "YouTube" }}{% else %}<svg aria-hidden="true"><use href="#blog"/></svg> {{ kat.ad if kat else "Blog" }}{% endif -%}
               </span>
-              <time class="feed-date" datetime="{{ item.date | isoDate }}">{{ item.date | trDate }}</time>
+              <time class="feed-date" datetime="{{ item.date | isoDate }}">{{ item.date | dateLabel(lang) }}</time>
             </div>
-            <h2><a href="{{ href }}"{% if isVideo %} target="_blank" rel="noopener"{% endif %}>{{ item.data.title }}</a></h2>
+            <h2><a href="{{ href }}"{% if isVideo %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.data.title }}</a></h2>
             <p>{{ item.data.description }}</p>
-            <span class="feed-action" aria-hidden="true">{{ "Videoyu İzle" if isVideo else "Yazıyı Oku" }} <svg><use href="#arrow"/></svg></span>
+            <span class="feed-action" aria-hidden="true">{{ ui.watch if isVideo else ui.read }} <svg><use href="#arrow"/></svg></span>
           </div>
           <div class="feed-media">
             {%- if thumb %}

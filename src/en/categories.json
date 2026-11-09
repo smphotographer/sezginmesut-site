@@ -1,0 +1,40 @@
+{
+  "liste": [
+    {
+      "ad": "Motorcycles",
+      "slug": "motorcycles",
+      "aciklama": "Motorcycle and scooter adventures, gear and riding notes.",
+      "trSlug": "motosiklet"
+    },
+    {
+      "ad": "Travel",
+      "slug": "travel",
+      "aciklama": "Travel journals, routes and stories from the road.",
+      "trSlug": "gezi"
+    },
+    {
+      "ad": "Gardening",
+      "slug": "gardening",
+      "aciklama": "Compost, soil preparation and hands-on gardening.",
+      "trSlug": "bahce"
+    },
+    {
+      "ad": "Woodworking",
+      "slug": "woodworking",
+      "aciklama": "Wood carving, DIY projects and workshop experiences.",
+      "trSlug": "ahsap"
+    },
+    {
+      "ad": "Product Experiences",
+      "slug": "product-experiences",
+      "aciklama": "Hands-on product reviews and experiences.",
+      "trSlug": "urun-deneyimi"
+    },
+    {
+      "ad": "Design and Technology",
+      "slug": "design-technology",
+      "aciklama": "Creative projects, interactive simulators and digital design.",
+      "trSlug": "tasarim-teknoloji"
+    }
+  ]
+}

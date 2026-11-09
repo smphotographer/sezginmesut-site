@@ -16,7 +16,7 @@ backend:
 
 site_url: https://sezginmesut.com
 display_url: https://sezginmesut.com
-logo_url: /gorseller/favicon-siyah.png
+logo_url: /gorseller/sezgin-mesut-transparent.png
 
 media_folder: src/gorseller/yazilar
 public_folder: /gorseller/yazilar
@@ -209,3 +209,200 @@ collections:
               - label: Açıklama (SEO)
                 name: aciklama
                 widget: text
+
+  # English translations are edited independently from the Turkish collections.
+  - name: posts_en
+    label: Blog Yazıları — English
+    label_singular: English Article
+    description: İngilizce blog yazıları. Türkçe sürümleri bağımsız düzenlenir.
+    folder: src/en/blog/posts
+    extension: md
+    format: frontmatter
+    create: true
+    slug: '{{title}}'
+    summary: '{{title}} — {{date | date(''DD.MM.YYYY'')}}{{draft | ternary('' (TASLAK)'', '''')}}'
+    sortable_fields:
+      fields:
+      - date
+      - title
+      default:
+        field: date
+        direction: descending
+    preview_path: en/blog/{{slug}}/
+    fields:
+    - label: Başlık
+      name: title
+      widget: string
+      hint: Sayfadaki ana başlık (H1). Ana anahtar kelimeyi başa yakın yazın.
+    - label: Türkçe karşılığının adresi
+      name: translationOf
+      widget: string
+      hint: 'Tam Türkçe sayfa yolu. Örnek: /blog/sen-pisir-malzemelere-gore-yemek-onerileri/'
+      pattern:
+      - ^/blog/[^/]+/$
+      - /blog/yazi-adresi/ biçiminde girin.
+    - label: SEO Başlığı (isteğe bağlı)
+      name: seoTitle
+      widget: string
+      required: false
+      hint: Google'da görünecek başlık. Boş bırakırsanız Başlık kullanılır. En fazla ~55 karakter.
+    - label: SEO Açıklaması
+      name: description
+      widget: text
+      hint: Google arama sonucunda başlığın altında görünür. 120-160 karakter ideal.
+      pattern:
+      - ^[\s\S]{50,170}$
+      - Açıklama 50 ile 170 karakter arasında olmalı
+    - label: Yayın Tarihi
+      name: date
+      widget: datetime
+      format: YYYY-MM-DD
+      time_format: false
+      default: '{{now}}'
+    - label: Güncelleme Tarihi (isteğe bağlı)
+      name: updated
+      widget: datetime
+      format: YYYY-MM-DD
+      time_format: false
+      required: false
+      hint: Yazıyı sonradan önemli ölçüde güncellediyseniz girin.
+    - label: Kategori
+      name: category
+      widget: relation
+      collection: settings_en
+      file: kategoriler
+      value_field: liste.*.slug
+      search_fields:
+      - liste.*.ad
+      display_fields:
+      - liste.*.ad
+    - label: Etiketler
+      name: etiketler
+      widget: list
+      required: false
+      hint: Virgülle ayırarak yazın. Örn. honda sh125, motor gezi
+    - label: Kapak Görseli
+      name: cover
+      widget: image
+      hint: Yatay (16:9) ve en az 1200 px genişliğinde olmalı. Sosyal medyada paylaşım görseli olarak da kullanılır.
+    - label: Kapak Görseli Açıklaması (alt metin)
+      name: coverAlt
+      widget: string
+      hint: Görselde ne olduğunu kısaca anlatın. Google görsel aramada kullanılır.
+    - label: Kapak Görseli Alt Yazısı (isteğe bağlı)
+      name: coverCaption
+      widget: string
+      required: false
+    - label: YouTube Videosu (isteğe bağlı)
+      name: youtube
+      widget: string
+      required: false
+      hint: Video bağlantısını yapıştırın. Yazının sonunda gömülü olarak gösterilir.
+    - label: Taslak
+      name: draft
+      widget: boolean
+      default: false
+      hint: Açıkken yazı sitede yayınlanmaz.
+    - label: İçerik
+      name: body
+      widget: markdown
+      hint: İngilizce metni yazın. İki dildeki içerikler bağımsız kaydedilir.
+  - name: videos_en
+    label: Video Kartları — English
+    label_singular: English Video Card
+    description: Videonun İngilizce başlık ve açıklaması. Video dili değişmez.
+    folder: src/en/videos
+    extension: md
+    format: frontmatter
+    create: true
+    slug: '{{title}}'
+    summary: '{{title}} — {{channel}} — {{date | date(''DD.MM.YYYY'')}}'
+    sortable_fields:
+      fields:
+      - date
+      - title
+      default:
+        field: date
+        direction: descending
+    fields:
+    - label: Video Başlığı
+      name: title
+      widget: string
+    - label: YouTube Bağlantısı
+      name: url
+      widget: string
+      pattern:
+      - ^https://(www\.)?(youtube\.com|youtu\.be)/
+      - Geçerli bir YouTube bağlantısı girin
+    - label: Kanal
+      name: channel
+      widget: select
+      options:
+      - Sezgin Mesut
+      - Bahçe Sırları
+      - Yoldan Kareler
+      - Deneyim Raporu
+    - label: Yayın Tarihi
+      name: date
+      widget: datetime
+      format: YYYY-MM-DD
+      time_format: false
+      default: '{{now}}'
+    - label: Kısa Açıklama
+      name: description
+      widget: text
+    - label: Kategori
+      name: category
+      widget: relation
+      collection: settings_en
+      file: kategoriler
+      value_field: liste.*.slug
+      search_fields:
+      - liste.*.ad
+      display_fields:
+      - liste.*.ad
+      required: false
+    - label: Küçük Resim (isteğe bağlı)
+      name: thumbnail
+      widget: image
+      required: false
+      hint: Boş bırakırsanız YouTube'un kendi küçük resmi kullanılır.
+    - label: Taslak
+      name: draft
+      widget: boolean
+      default: false
+    - label: Not
+      name: body
+      widget: hidden
+      required: false
+  - name: settings_en
+    label: Kategoriler — English
+    editor:
+      preview: false
+    files:
+    - name: kategoriler
+      label: Kategoriler
+      file: src/en/categories.json
+      fields:
+      - label: Kategoriler
+        name: liste
+        widget: list
+        summary: '{{fields.ad}}'
+        fields:
+        - label: Kategori Adı
+          name: ad
+          widget: string
+        - label: Adres (slug)
+          name: slug
+          widget: string
+          hint: Küçük harf, Türkçe karakter ve boşluk yok. Örn. urun-deneyimi. Sonradan değiştirmeyin; adres değişir.
+          pattern:
+          - ^[a-z0-9-]+$
+          - Sadece küçük harf, rakam ve tire kullanın
+        - label: Açıklama (SEO)
+          name: aciklama
+          widget: text
+        - label: Türkçe kategori adresi
+          name: trSlug
+          widget: string
+          hint: 'Türkçe kategorinin slug değeri. Örnek: tasarim-teknoloji'

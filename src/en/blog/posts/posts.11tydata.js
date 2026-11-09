@@ -1,0 +1,1 @@
+export default {layout:'layouts/post.njk',ogType:'article',navActive:'blog',eleventyComputed:{permalink:data=>data.draft?false:`/en/blog/${data.page.fileSlug}/`,eleventyExcludeFromCollections:data=>Boolean(data.draft)}};
