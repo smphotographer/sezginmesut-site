@@ -69,8 +69,8 @@
         {%- set homePosts = collections.yazilar %}{% if lang == 'en' %}{% set homePosts = collections.postsEn %}{% endif %}
         {%- for post in homePosts | head(3) %}
         <a class="home-latest" href="{{ post.url }}">
-          <img src="{{ post.data.cover or site.defaultImage }}" alt="{{ post.data.coverAlt or post.data.title }}" width="264" height="165" loading="lazy" eleventy:widths="164,264">
-          <div><h3>{{ post.data.title | escape }}</h3><p>{{ post.data.description | escape }}</p><span>{{ ui.readArrow }} →</span></div>
+          <div class="home-latest-media"><img src="{{ post.data.cover or site.defaultImage }}" alt="{{ post.data.coverAlt or post.data.title }}" width="264" height="165" loading="lazy" eleventy:widths="164,264"></div>
+          <div class="home-latest-copy"><h3>{{ post.data.title | escape }}</h3><p>{{ post.data.description | escape }}</p><span>{{ ui.readArrow }} →</span></div>
         </a>
         {%- endfor %}
       </section>
