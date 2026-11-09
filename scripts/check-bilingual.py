@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 root=Path(__file__).resolve().parents[1]/'_site'
 class Page(HTMLParser):
     def __init__(self,path):
-        super().__init__();self.links=[];self.images=[];self.alternates={};self.canonical=None;self.lang=None;self.h1=0;self.jsonld=False;self.buffer='';self.noindex=False;self.article=False
+        super().__init__();self.links=[];self.images=[];self.alternates={};self.canonical=None;self.lang=None;self.h1=0;self.jsonld=False;self.buffer='';self.noindex=False;self.article=False;self.structured=[]
         self.feed(path.read_text(encoding='utf-8'))
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
@@ -24,7 +24,7 @@ class Page(HTMLParser):
     def handle_data(self,text):
         if self.jsonld:self.buffer+=text
     def handle_endtag(self,tag):
-        if tag=='script' and self.jsonld:json.loads(self.buffer);self.jsonld=False
+        if tag=='script' and self.jsonld:self.structured.append(json.loads(self.buffer));self.jsonld=False
 
 pages={('/'+p.relative_to(root).as_posix().removesuffix('index.html')):Page(p) for p in root.rglob('*.html') if 'admin' not in p.parts and p.name!='404.html'}
 for url,p in pages.items():
@@ -64,4 +64,20 @@ for language,prefix in [('tr',''),('en','/en')]:
     assert homepage.count('class="home-latest"')==3,(language,'latest article cards')
     assert homepage.count('src="/gorseller/sezgin-mesut-transparent.png"')==1,(language,'logo')
 
-print(f'PASS: {len(pages)} pages; reciprocal language pairs, canonical URLs, links, images, sitemap, 2 search indexes and homepage thumbnails.')
+source=root.parent/'src'
+profile_links=json.loads((source/'_data/profile.json').read_text(encoding='utf-8'))['links']
+same_as=[link['url'] for link in profile_links]
+assert json.loads((source/'_data/site.json').read_text(encoding='utf-8'))['sameAs']==same_as,'Person identity matches visible personal profiles'
+for url in ['/hakkimda/','/en/about/']:
+    page=pages[url]
+    nodes=[node for block in page.structured for node in block.get('@graph',[])]
+    profile=next(node for node in nodes if node.get('@type')=='ProfilePage')
+    person=profile['mainEntity']
+    assert profile['url']=='https://sezginmesut.com'+url
+    assert person['@type']=='Person' and person['name']=='Sezgin Mesut'
+    assert person['@id']=='https://sezginmesut.com/#person'
+    assert person['sameAs']==same_as
+    assert all(link in page.links for link in same_as),'Schema profiles must be visible on the page'
+    assert url in listed,'Profile page is discoverable through sitemap'
+
+print(f'PASS: {len(pages)} pages; language pairs, canonical URLs, links, images, sitemap, search indexes, homepage thumbnails and ProfilePage identity.')

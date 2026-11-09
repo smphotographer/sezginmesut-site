@@ -24,7 +24,7 @@
         {%- if etiketler and etiketler.length %}
         "keywords": {{ etiketler | join(", ") | dump | safe }},
         {%- endif %}
-        "author": { "@type": "Person", "@id": "{{ site.url }}/#person", "name": "{{ site.name }}", "url": "{{ site.url }}/" },
+        "author": { "@type": "Person", "@id": "{{ site.url }}/#person", "name": "{{ site.name }}", "url": "{{ site.url }}/hakkimda/" },
         "publisher": { "@id": "{{ site.url }}/#person" }
         {%- if ytId %},
         "video": {
@@ -69,7 +69,7 @@
       <article>
         <header class="article-header">
           <div class="article-meta">
-            <span>{{ ui.author }}: {{ site.name }}</span>
+            <span>{{ ui.author }}: <a href="{{ aboutPath }}" rel="author">{{ site.name }}</a></span>
             <time datetime="{{ page.date | isoDate }}">{{ page.date | dateLabel(lang) }}</time>
             {%- if updated %}<span>{{ ui.updated }}: <time datetime="{{ updated | isoDate }}">{{ updated | dateLabel(lang) }}</time></span>{% endif %}
             <span>{{ content | readingTime }} {{ ui.minutes }}</span>

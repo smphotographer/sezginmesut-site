@@ -1,0 +1,39 @@
+{% extends "layouts/base.njk" %}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "{{ page.url | absUrl(site.url) }}#profile",
+      "url": "{{ page.url | absUrl(site.url) }}",
+      "name": {{ title | dump | safe }},
+      "description": {{ description | dump | safe }},
+      "inLanguage": "{{ languageTag }}",
+      "mainEntity": {% include "partials/person-schema.njk" %}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": {{ ui.home | dump | safe }}, "item": "{{ site.url }}{{ homePath }}"},
+        {"@type": "ListItem", "position": 2, "name": {{ ui.about | dump | safe }}, "item": "{{ page.url | absUrl(site.url) }}"}
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
+{% block main %}
+<main id="icerik" class="about-page">
+  <nav class="breadcrumb" aria-label="{{ ui.home }}"><ol><li><a href="{{ homePath }}">{{ ui.home }}</a></li><li aria-current="page">{{ ui.about }}</li></ol></nav>
+  <section class="about-hero" aria-labelledby="about-heading">
+    <div class="about-portrait"><img src="{{ site.defaultImage }}" alt="{{ ui.portrait }}" width="400" height="400" loading="eager" fetchpriority="high" eleventy:widths="320,480,800"></div>
+    <div class="about-intro"><p class="about-eyebrow">{{ ui.personJob }}</p><h1 id="about-heading">{{ title }}</h1><p class="about-lead">{{ description }}</p><a class="about-blog-link" href="{{ blogPath }}">{{ ui.allPosts }} →</a></div>
+  </section>
+  <div class="about-body">
+    <article class="article-content">{{ content | safe }}</article>
+    <aside class="about-profiles" aria-labelledby="profiles-heading"><h2 id="profiles-heading">{{ ui.personalProfiles }}</h2><p>{{ ui.profileIntro }}</p><ul>{% for link in profile.links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.name }} <span aria-hidden="true">↗</span></a></li>{% endfor %}</ul></aside>
+  </div>
+</main>
+{% endblock %}

@@ -2,6 +2,7 @@
       <a class="wordmark custom-wordmark" href="{{ homePath }}" aria-label="{{ ui.homeLink }}"><img class="site-logo" src="/gorseller/sezgin-mesut-transparent.png" width="84" height="84" alt="{{ ui.logoAlt }}" eleventy:ignore></a>
       <nav aria-label="{{ ui.menu }}">
         <a href="{{ blogPath }}"{% if navActive == "blog" %} class="active" aria-current="page"{% endif %}>Blog</a>
+        <a href="{{ aboutPath }}"{% if navActive == "about" %} class="active" aria-current="page"{% endif %}>{{ ui.about }}</a>
         <a href="{{ homePath }}#youtube-kanallari">YouTube</a>
         <a href="{{ homePath }}#instagram-hesaplari">Instagram</a>
         <a href="{{ homePath }}#portfolyo">{{ ui.portfolio }}</a>

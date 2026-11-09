@@ -44,7 +44,7 @@
   <div class="page">
 {% include "partials/header.njk" %}
 {% block main %}{% endblock %}
-    <footer class="footer{% if isHome %} reveal{% endif %}"><span>© <span id="year">{{ build.year }}</span> {{ site.name }}</span><span>{{ ui.footer }}<svg aria-hidden="true"><use href="#spark"/></svg></span></footer>
+    <footer class="footer{% if isHome %} reveal{% endif %}"><span>© <span id="year">{{ build.year }}</span> {{ site.name }} · <a href="{{ aboutPath }}">{{ ui.about }}</a></span><span>{{ ui.footer }}<svg aria-hidden="true"><use href="#spark"/></svg></span></footer>
   </div>
 {% block scripts %}{% endblock %}
 </body>

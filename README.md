@@ -11,6 +11,8 @@ Eleventy + Sveltia CMS. Cloudflare builds and publishes `main`.
 - The shared layouts and UI dictionaries provide both languages. `/` is Turkish; `/en/` is English. Existing Turkish addresses are preserved.
 - English articles and video cards have separate CMS collections. Editing one language does not automatically translate or replace the other. Video audio remains in its original language.
 - Latest articles on each homepage include small cover thumbnails. New published content enters that language’s homepage, feed, category archive and search index on the next build.
+- The personal biography lives at `/hakkimda/` and `/en/about/`, and can be edited in the CMS under **Hakkımda / About**. Both pages use ProfilePage markup with the same Person identifier as the homepage and article authors.
+- `src/_data/profile.json` contains the visible personal profile links. Keep its URLs in sync with `sameAs` in `src/_data/site.json`; topic channels remain ordinary channel links rather than alternate identities for the person.
 
 ## Search
 

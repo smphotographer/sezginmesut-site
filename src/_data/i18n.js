@@ -1,6 +1,10 @@
 export default {
   "tr": {
     "home": "Ana Sayfa",
+    "about": "Hakkımda",
+    "aboutMore": "Beni daha yakından tanı",
+    "personalProfiles": "Kişisel profillerim",
+    "profileIntro": "Sosyal medya hesaplarım ve fotoğraf ile tasarım portfolyolarım.",
     "skip": "İçeriğe geç",
     "menu": "Ana menü",
     "portfolio": "Portfolyo",
@@ -71,6 +75,10 @@ export default {
   },
   "en": {
     "home": "Home",
+    "about": "About",
+    "aboutMore": "Get to know me",
+    "personalProfiles": "Personal profiles",
+    "profileIntro": "My personal social accounts and photography and design portfolios.",
     "skip": "Skip to content",
     "menu": "Main navigation",
     "portfolio": "Portfolio",

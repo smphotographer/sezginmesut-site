@@ -406,3 +406,42 @@ collections:
           name: trSlug
           widget: string
           hint: 'Türkçe kategorinin slug değeri. Örnek: tasarim-teknoloji'
+
+  # Personal biography pages, independently editable in both languages.
+  - name: profile_pages
+    label: Hakkımda / About
+    editor:
+      preview: false
+    files:
+    - name: about_tr
+      label: Hakkımda — Türkçe
+      file: src/hakkimda.md
+      fields:
+      - label: Sayfa Başlığı
+        name: title
+        widget: string
+      - label: SEO Başlığı
+        name: seoTitle
+        widget: string
+      - label: Açıklama
+        name: description
+        widget: text
+      - label: Biyografi / İçerik
+        name: body
+        widget: markdown
+    - name: about_en
+      label: About Me — English
+      file: src/en/about.md
+      fields:
+      - label: Sayfa Başlığı
+        name: title
+        widget: string
+      - label: SEO Başlığı
+        name: seoTitle
+        widget: string
+      - label: Açıklama
+        name: description
+        widget: text
+      - label: Biyografi / İçerik
+        name: body
+        widget: markdown

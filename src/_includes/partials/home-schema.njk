@@ -11,17 +11,7 @@
         "inLanguage": "{{ languageTag }}",
         "publisher": { "@id": "{{ site.url }}/#person" }
       },
-      {
-        "@type": "Person",
-        "@id": "{{ site.url }}/#person",
-        "name": "{{ site.name }}",
-        "url": "{{ site.url }}{{ homePath }}",
-        "image": "{{ site.defaultImage | absUrl(site.url) }}",
-        "jobTitle": {{ ui.personJob | dump | safe }},
-        "description": {{ ui.identity | dump | safe }},
-        "knowsAbout": {{ (['Photography', 'Gardening', 'Woodworking', 'Motorcycle trips', 'Product reviews', 'Design'] if lang == 'en' else ['Fotoğrafçılık', 'Bahçecilik', 'Ahşap işleri', 'Motosiklet gezileri', 'Ürün deneyimleri', 'Tasarım']) | dump | safe }},
-        "sameAs": {{ site.sameAs | dump | safe }}
-      }
+      {% include "partials/person-schema.njk" %}
     ]
   }
   </script>

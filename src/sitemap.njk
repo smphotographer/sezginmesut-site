@@ -5,7 +5,7 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for p in collections.all %}
-{%- if p.url and (p.url == '/' or p.url == '/en/' or p.url.startsWith('/blog/') or p.url.startsWith('/en/blog/')) and not p.url.endsWith('.xml') %}
+{%- if p.url and (p.url == '/' or p.url == '/en/' or p.data.ogType == 'profile' or p.url.startsWith('/blog/') or p.url.startsWith('/en/blog/')) and not p.url.endsWith('.xml') %}
 {%- set include = true %}
 {%- if p.data.kategori %}
 {%- set feed = collections.akis %}{% if p.data.lang == 'en' %}{% set feed = collections.feedEn %}{% endif %}
